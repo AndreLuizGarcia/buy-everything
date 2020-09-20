@@ -21,6 +21,11 @@ function WelcomePage() {
   const [searchValue, setSearchValue] = useState('')
   const [products, setProducts] = useState(null)
 
+  let filteredProducts = products && products.filter((product) => {
+    return product.id.toString().indexOf(searchValue) !== -1 ||
+            product.title.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1
+  })
+
   useEffect(() => {
     window.scrollTo(0, 0)
     document.body.scrollTop = 0; // For Safari
@@ -55,10 +60,10 @@ function WelcomePage() {
         </Section>
 
         <Wrapper data-aos="zoom-in">
-          <Carousel arrows itemWidth={300} infinite>
+          <Carousel arrows itemWidth={300}>
             {
               products === null ? <ShimmerCarouselCard /> :
-              products.map(product => (
+              filteredProducts.map(product => (
                 <CarouselCard 
                   id={product.id}
                   name={product.title}
