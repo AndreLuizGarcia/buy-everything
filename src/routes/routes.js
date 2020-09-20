@@ -3,11 +3,11 @@ import { Route, Redirect } from 'react-router-dom'
 
 const isLogged = true /// verificar no redux if the user is logged
 
-const Routes = ({ isPrivate = false, component: Component, ...rest }) => (
+const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      isPrivate === isLogged ? (
+      isLogged ? (
         <Component {...props} />
       ) : (
         <Redirect to={{ pathname: "/", state: { from: props.location } }} />
@@ -16,4 +16,4 @@ const Routes = ({ isPrivate = false, component: Component, ...rest }) => (
   />
 )
 
-export default Routes
+export default PrivateRoute

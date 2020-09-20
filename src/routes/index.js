@@ -1,6 +1,6 @@
 import React from 'react'
-import { BrowserRouter, Switch } from 'react-router-dom'
-import Route from './routes'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import PrivateRoute from './routes'
 
 import WelcomePage from '../pages/WelcomePage'
 import SignIn from '../pages/SignIn'
@@ -17,7 +17,7 @@ function Routes() {
         <Route path="/signin" component={SignIn} />
         <Route path="/productlist" component={ProductList} />
         <Route path="/productdescription" component={ProductDescription} />
-        <Route path="/mycart" component={MyCart} />
+        <PrivateRoute path="/mycart" component={MyCart} isPrivate />
         <Route path='*' component={NotFound} />
       </Switch>
     </BrowserRouter>
