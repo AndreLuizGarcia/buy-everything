@@ -22,8 +22,8 @@ function WelcomePage() {
   const [products, setProducts] = useState(null)
 
   let filteredProducts = products && products.filter((product) => {
-    return product.id.toString().indexOf(searchValue) !== -1 ||
-            product.title.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1
+    return product.title.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1 ||
+           product.id.toString().indexOf(searchValue) !== -1
   })
 
   useEffect(() => {
@@ -60,7 +60,7 @@ function WelcomePage() {
         </Section>
 
         <Wrapper data-aos="zoom-in">
-          <Carousel arrows itemWidth={300}>
+          <Carousel arrows itemWidth={300} infinite={!products}>
             {
               products === null ? <ShimmerCarouselCard /> :
               filteredProducts.map(product => (
