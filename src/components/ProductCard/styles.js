@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
+  justify-content: space-between;
 
   background: #FFFFFF;
   border: 1px solid rgba(0, 0, 0, 0.12);
