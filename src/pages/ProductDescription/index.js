@@ -24,7 +24,7 @@ function ProductDescription() {
     AOS.init({
       duration : 2000
     })
-  }, [])
+  })
 
   async function getProduct() {
     try {
