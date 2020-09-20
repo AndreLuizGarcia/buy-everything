@@ -16,7 +16,7 @@ function Routes() {
         <Route path="/" exact component={WelcomePage} />
         <Route path="/signin" component={SignIn} />
         <Route path="/productlist" component={ProductList} />
-        <Route path="/productdescription" component={ProductDescription} />
+        <Route path="/:id/productdescription" component={ProductDescription} />
         <PrivateRoute path="/mycart" component={MyCart} isPrivate />
         <Route path='*' component={NotFound} />
       </Switch>
