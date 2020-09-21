@@ -15,10 +15,16 @@ const removeProduct = product => ({
   payload: product
 })
 
+const removeAll = product => ({
+  type: types.CART_REMOVE_ALL,
+  payload: null
+})
+
 const actions = {
   addProduct,
   decreaseProduct,
-  removeProduct
+  removeProduct,
+  removeAll
 }
 
 export { actions }
