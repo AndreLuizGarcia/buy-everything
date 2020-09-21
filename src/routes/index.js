@@ -6,7 +6,7 @@ import WelcomePage from '../pages/WelcomePage'
 import SignIn from '../pages/SignIn'
 import ProductList from '../pages/ProductList'
 import ProductDescription from '../pages/ProductDescription'
-import MyCart from '../pages/Cart'
+import MyCart from '../pages/MyCart'
 import NotFound from '../pages/NotFound'
 
 function Routes() {
