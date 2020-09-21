@@ -31,7 +31,7 @@ const cart = (state = initialState, action) => {
 
       return state = newState
     default:
-      return state
+      return [...state]
   }
 }
 
