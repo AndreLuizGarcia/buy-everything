@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 
@@ -21,24 +22,36 @@ function ProductList() {
   })
 
   useEffect(() => {
-    getProducts()
     window.scrollTo(0, 0)
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome
+    document.body.scrollTop = 0
+    document.documentElement.scrollTop = 0
 
     AOS.init({
       duration : 2000
     })
+
+    const ourRequest = axios.CancelToken.source()
+    getProducts()
+
+    async function getProducts() {
+      try {
+        const { data } = await FakeStoreAPI.get('/products', {
+          cancelToken: ourRequest.token,
+        })
+        setProducts(data)
+      } catch (error) {
+        if (!axios.isCancel(error)) {
+          alert('Não foi possível carregar as informações do produto. Verifique sua conexão com a internet')
+        }
+      }
+    }
+
+    return () => {
+      ourRequest.cancel()
+    }
   }, [])
 
-  async function getProducts() {
-    try {
-      const { data } = await FakeStoreAPI.get('/products')
-      setProducts(data)
-    } catch (error) {
-      alert('Não foi possível carregar os produtos. Verifique sua conexão com a internet')
-    }
-  }
+
 
   return (
     <Container>
