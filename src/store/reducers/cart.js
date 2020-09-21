@@ -1,6 +1,6 @@
 import { types } from '../types/cart'
 
-const initialState = localStorage.getItem('@BUY_EVERYTHING') ? JSON.parse(localStorage.getItem('@BUY_EVERYTHING')) : null
+const initialState = localStorage.getItem('@BUY_EVERYTHING') ? JSON.parse(localStorage.getItem('@BUY_EVERYTHING')) : []
 let newState = []
 
 const cart = (state = initialState, action) => {
