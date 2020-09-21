@@ -12,6 +12,7 @@ function Header() {
   const history = useHistory()
   const dispatch = useDispatch()
   const products = useSelector(state => state.cart)
+  const totalOfProducts = products.reduce((a, b) => a + (b['quantity'] || 0), 0)
 
   function handleLogout() {
     dispatch(actionsLogin.isLoggedFalse(false))
@@ -21,18 +22,18 @@ function Header() {
   return (
     <Container>
       <img src={logo} alt="Buy everything" onClick={() => history.push('/')} role="button" />
-      { isLogged ?
         <LeftSide>
-          <span>Olá, <strong>Cliente</strong></span>
-          <CartButton onClick={() => history.push('mycart')}>
+          <span style={{ visibility: isLogged ? 'unset' : 'hidden'  }}>Olá, <strong>Cliente</strong></span>
+          <CartButton onClick={() => history.push('/mycart')}>
             <img src={cart} alt="Cart" />
-            <span>{products ? products.length : 0}</span>
+            <span>{totalOfProducts}</span>
           </CartButton>
+        { isLogged ?
           <Button onClick={handleLogout}>
             SAIR
-          </Button>
-        </LeftSide> : <Button onClick={() => history.push('/signin')}>ENTRAR</Button>
-      }
+          </Button> : <Button onClick={() => history.push('/signin')}>ENTRAR</Button>
+        } 
+      </LeftSide> 
     </Container>
   )
 }
