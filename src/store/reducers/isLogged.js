@@ -1,6 +1,6 @@
 import { types } from '../types/isLogged'
 
-const isLogged = (state = true, action) => {
+const isLogged = (state = false, action) => {
   switch (action.type) {
     case types.isLogged_TRUE:
       return state = action.payload
