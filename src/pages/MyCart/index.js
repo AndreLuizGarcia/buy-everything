@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+
+import Swal from 'sweetalert2'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 
@@ -29,13 +31,24 @@ function Cart() {
 
   function handleSendCart() {
     if(!isLogged) {
-      alert('Para concluir seu pedido é necessário entrar na sua conta.')
-      history.push('/signin')
+      Swal.fire({
+        title: 'Para concluir seu pedido é necessário entrar na sua conta.',
+        showCancelButton: true,
+        confirmButtonText: `OK`,
+        icon: 'warning',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          history.push('/signin')
+        } return
+      })
     } else {
-      alert('Compra realizada com sucesso!')
+      Swal.fire(
+        'Parabéns',
+        'Compra realizada com sucesso!',
+        'success'
+      )
       dispatch(actionsCart.removeAll())
     }
-
   }
 
   return (
