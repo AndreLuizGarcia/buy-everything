@@ -11,11 +11,12 @@ import Header from '../../components/Header'
 import ShimmerDescriptionCard from '../../components/ShimmerDescriptionCard'
 
 import FakeStoreAPI from '../../services/FakeStoreAPI'
-import { Container, Main, CTA, Control, AddCart } from './styles'
+import { Container, Main, CTA, Control, AddCart, SnackNotification } from './styles'
 
 function ProductDescription() {
   const { id } = useParams();
   const [product, setProduct] = useState([])
+  const [snackNotificationVisibility, setSnackNotificationVisibility] = useState(false)
   const dispatch = useDispatch()
 
 
@@ -34,7 +35,8 @@ function ProductDescription() {
         setProduct(data)
       } catch (error) {
         if (!axios.isCancel(error)) {
-          alert('Não foi possível carregar as informações do produto. Verifique sua conexão com a internet')
+          setSnackNotificationVisibility(true)
+          setTimeout(() => setSnackNotificationVisibility(false), 3000) 
         }
       }
     }
@@ -86,9 +88,10 @@ function ProductDescription() {
           </>
         }
         </Main>
-
-
-
+        <SnackNotification visible={snackNotificationVisibility}>
+          <span>Não foi possível carregar as informações dos produtos. Verifique sua conexão com a internet.</span>
+          <button onClick={() => setSnackNotificationVisibility(false)}>X</button>
+        </SnackNotification>
     </Container>
   )
 }

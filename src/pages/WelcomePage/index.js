@@ -16,11 +16,12 @@ import ShimmerCarouselCard from '../../components/ShimmerCarouselCard'
 
 import shopBackground from '../../assets/shopBackground.png'
 import './styles.css'
-import { Container, Main, Section, Wrapper } from './styles'
+import { Container, Main, Section, Wrapper, SnackNotification } from './styles'
 
 function WelcomePage() {
   const [searchValue, setSearchValue] = useState('')
   const [products, setProducts] = useState(null)
+  const [snackNotificationVisibility, setSnackNotificationVisibility] = useState(false)
 
   let filteredProducts = products && products.filter((product) => {
     return product.title.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1 ||
@@ -47,7 +48,8 @@ function WelcomePage() {
         setProducts(data)
       } catch (error) {
         if (!axios.isCancel(error)) {
-          alert('Não foi possível carregar as informações do produto. Verifique sua conexão com a internet')
+          setSnackNotificationVisibility(true)
+          setTimeout(() => setSnackNotificationVisibility(false), 3000)  
         }
       }
     }
@@ -88,6 +90,10 @@ function WelcomePage() {
           <Link to='/productlist'>Ver todos os produtos</Link>
         </Wrapper>
       </Main>
+      <SnackNotification visible={snackNotificationVisibility}>
+        <span>Não foi possível carregar as informações dos produtos. Verifique sua conexão com a internet.</span>
+        <button onClick={() => setSnackNotificationVisibility(false)}>X</button>
+      </SnackNotification>
     </Container>
   )
 }

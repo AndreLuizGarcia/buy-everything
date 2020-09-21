@@ -3,13 +3,14 @@ import { Link, useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { actions } from '../../store/actions/isLogged'
 
-import { Container, Content, AnimationContainer, Background } from './styles';
+import { Container, Content, AnimationContainer, Background, SnackNotification } from './styles';
 
 function SignIn() {
   const history = useHistory()
   const dispatch = useDispatch()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+	const [snackNotificationVisibility, setSnackNotificationVisibility] = useState(false)
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -18,7 +19,8 @@ function SignIn() {
       dispatch(actions.isLoggedTrue(true))
       history.push('/')
     } else {
-      alert('Usuário e senha não correspondem. Por favor, tente novamente.')
+      setSnackNotificationVisibility(true)
+      setTimeout(() => setSnackNotificationVisibility(false), 3000)
       setUsername('')
       setPassword('')
     }
@@ -41,7 +43,10 @@ function SignIn() {
           </Link>
         </AnimationContainer>
       </Content>
-
+      <SnackNotification visible={snackNotificationVisibility}>
+        <span>Usuário e senha não correspondem. Por favor, tente novamente.</span>
+        <button onClick={() => setSnackNotificationVisibility(false)}>X</button>
+      </SnackNotification>
     </Container>
   )
 }

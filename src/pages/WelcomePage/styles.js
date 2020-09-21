@@ -76,3 +76,34 @@ export const Wrapper = styled.div`
     margin-top: 20px;
   }
 `;
+
+export const SnackNotification = styled.div`
+  display: flex;
+
+  width: 295px;
+  position: fixed;
+  top: 95px;
+  right: 20px;
+
+  font-size: 14px;
+  color: white;
+  background: rgba(242, 24, 24, 0.9);
+  line-height: 1.3em;
+  padding: 10px 15px;
+  margin: 5px 10px;
+  border-radius: 5px;
+  transition: opacity 0.5s ease-in;
+
+  visibility: visible;
+  transition: visibility 0s linear 300ms, opacity 300ms;
+
+  opacity: ${ props => props.visible ? 1 : 0 };
+
+  button {
+    border: none;
+    color: #ffffff;
+    background: none;
+
+    cursor: pointer;
+  }
+`

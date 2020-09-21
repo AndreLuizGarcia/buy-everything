@@ -8,13 +8,14 @@ import FakeStoreAPI from '../../services/FakeStoreAPI'
 import Header from '../../components/Header'
 import ProductCard from '../../components/ProductCard'
 
-import { Container, Main } from './styles'
+import { Container, Main, SnackNotification } from './styles'
 
 import ShimmerProductList from '../../components/ShimmerProductList'
 
 function ProductList() {
   const [searchValue, setSearchValue] = useState('')
   const [products, setProducts] = useState(null)
+  const [snackNotificationVisibility, setSnackNotificationVisibility] = useState(false)
 
   let filteredProducts = products && products.filter((product) => {
     return  product.title.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1 ||
@@ -41,7 +42,8 @@ function ProductList() {
         setProducts(data)
       } catch (error) {
         if (!axios.isCancel(error)) {
-          alert('Não foi possível carregar as informações do produto. Verifique sua conexão com a internet')
+          setSnackNotificationVisibility(true)
+          setTimeout(() => setSnackNotificationVisibility(false), 3000)  
         }
       }
     }
@@ -77,6 +79,10 @@ function ProductList() {
           </div>
         </div>
       </Main>
+      <SnackNotification visible={snackNotificationVisibility}>
+        <span>Não foi possível carregar as informações dos produtos. Verifique sua conexão com a internet.</span>
+        <button onClick={() => setSnackNotificationVisibility(false)}>X</button>
+      </SnackNotification>
     </Container>
   )
 }
