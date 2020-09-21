@@ -52,6 +52,7 @@ function ProductList() {
             products === null ? <ShimmerProductList /> :
             filteredProducts.map(product => (
               <ProductCard
+                key={product.id}
                 id={product.id}
                 name={product.title}
                 price={product.price}
