@@ -65,6 +65,7 @@ function WelcomePage() {
               products === null ? <ShimmerCarouselCard /> :
               filteredProducts.map(product => (
                 <CarouselCard 
+                  key={product.id}
                   id={product.id}
                   name={product.title}
                   price={product.price}
