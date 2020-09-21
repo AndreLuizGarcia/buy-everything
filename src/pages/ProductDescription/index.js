@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import axios from 'axios'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
+
+import { actions as actionsCart } from '../../store/actions/cart'
 
 import Header from '../../components/Header'
 import ShimmerDescriptionCard from '../../components/ShimmerDescriptionCard'
@@ -11,28 +15,46 @@ import { Container, Main, CTA, Control, AddCart } from './styles'
 
 function ProductDescription() {
   const { id } = useParams();
-  const [product, setProduct] = useState(null)
+  const [product, setProduct] = useState([])
+  const dispatch = useDispatch()
+
+
 
   useEffect(() => {
+    const ourRequest = axios.CancelToken.source()
     getProduct()
 
-    window.scrollTo(0, 0)
+    async function getProduct() {
+      try {
+        const { data } = await FakeStoreAPI.get(`/products/${id}`, {
+          cancelToken: ourRequest.token,
+        })
+        data['quantity'] = 1
 
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome
+        setProduct(data)
+      } catch (error) {
+        if (!axios.isCancel(error)) {
+          alert('Não foi possível carregar as informações do produto. Verifique sua conexão com a internet')
+        }
+      }
+    }
+
+    window.scrollTo(0, 0)
+    document.body.scrollTop = 0
+    document.documentElement.scrollTop = 0
 
     AOS.init({
       duration : 2000
     })
+
+    return () => {
+      ourRequest.cancel()
+    }
   })
 
-  async function getProduct() {
-    try {
-      const { data } = await FakeStoreAPI.get(`/products/${id}`)
-      setProduct(data)
-    } catch (error) {
-      alert('Não foi possível carregar as informações do produto. Verifique sua conexão com a internet')
-    }
+  function handleAddProduct() {
+    dispatch(actionsCart.addProduct(product))
+    setProduct({ ...product, quantity: 1})
   }
 
   return (
@@ -40,7 +62,7 @@ function ProductDescription() {
       <Header />
       <Main>
         {
-          product === null ? <ShimmerDescriptionCard /> :
+          product.length === 0  ? <ShimmerDescriptionCard /> :
           <>
             <h1 data-aos="fade-up">{product.title}</h1>
             <div data-aos="fade-right">
@@ -50,13 +72,13 @@ function ProductDescription() {
                 <CTA>
                   <span>R$ {product.price}</span>
                   <Control>
-                    <button>-</button>
-                      <span>3</span>
-                    <button>+</button>
+                    <button onClick={ () => product.quantity > 1 ? setProduct({ ...product, quantity: product.quantity - 1}) : null}>-</button>
+                      <span>{product.quantity}</span>
+                    <button onClick={ () => { setProduct({ ...product, quantity: product.quantity + 1})} }>+</button>
                   </Control>
-                  <AddCart>
+                  <AddCart onClick={handleAddProduct}>
                     Adicionar ao carrinho
-                    <span>R$66,90</span>
+                    <span>R$ {(product.price * product.quantity).toFixed(2)}</span>
                   </AddCart>
                 </CTA>
               </div>
