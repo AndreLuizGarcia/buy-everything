@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 import Carousel from '@brainhubeu/react-carousel'
 import '@brainhubeu/react-carousel/lib/style.css'
@@ -28,24 +29,33 @@ function WelcomePage() {
 
   useEffect(() => {
     window.scrollTo(0, 0)
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome
+    document.body.scrollTop = 0
+    document.documentElement.scrollTop = 0
     
     AOS.init({
       duration : 2000
     })
 
+    const ourRequest = axios.CancelToken.source()
     getProducts()
-  }, [])
 
-  async function getProducts() {
-    try {
-      const { data } = await FakeStoreAPI.get('/products')
-      setProducts(data)
-    } catch (error) {
-      alert('Não foi possível carregar os produtos. Verifique sua conexão com a internet')
+    async function getProducts() {
+      try {
+        const { data } = await FakeStoreAPI.get('/products', {
+          cancelToken: ourRequest.token,
+        })
+        setProducts(data)
+      } catch (error) {
+        if (!axios.isCancel(error)) {
+          alert('Não foi possível carregar as informações do produto. Verifique sua conexão com a internet')
+        }
+      }
     }
-  }
+
+    return () => {
+      ourRequest.cancel()
+    }
+  }, [])
 
   return (
     <Container>
