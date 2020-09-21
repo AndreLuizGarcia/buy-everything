@@ -6,7 +6,7 @@ import { actions as actionsCart } from '../../store/actions/cart'
 
 import { Container, Button } from './styles'
 
-function ProductCard({ id, name, price, description, image }) {
+function ProductCard({ id, name, price, description, image, quantity = 1 }) {
   const history = useHistory()
   const dispatch = useDispatch()
   const product = {
@@ -14,7 +14,8 @@ function ProductCard({ id, name, price, description, image }) {
     name,
     price,
     description,
-    image
+    image, 
+    quantity
   }
 
   function handleAddProduct() {
