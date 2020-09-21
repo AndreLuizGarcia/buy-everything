@@ -1,15 +1,21 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { actions } from '../../store/actions/isLogged'
 
 import { Container, Content, AnimationContainer, Background } from './styles';
 
 function SignIn() {
   const history = useHistory()
+  const dispatch = useDispatch()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  function handleSubmit() {
+  function handleSubmit(e) {
+    e.preventDefault()
+
     if(username === 'cliente' && password === '123456') {
+      dispatch(actions.isLoggedTrue(true))
       history.push('/')
     }
   }
