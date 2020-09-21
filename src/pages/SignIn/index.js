@@ -17,6 +17,10 @@ function SignIn() {
     if(username === 'cliente' && password === '123456') {
       dispatch(actions.isLoggedTrue(true))
       history.push('/')
+    } else {
+      alert('Usuário e senha não correspondem. Por favor, tente novamente.')
+      setUsername('')
+      setPassword('')
     }
   }
 
