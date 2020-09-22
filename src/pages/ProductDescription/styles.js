@@ -13,6 +13,11 @@ export const Main = styled.div`
 
   h1 {
     margin-top: 16px;
+
+    @media(max-width: 400px) {
+      font-size: 22px;
+      text-align: center;
+    }
   }
 
   > div {
@@ -32,6 +37,11 @@ export const Main = styled.div`
     img {
       width: 200px;
       height: 300px;
+
+      @media(max-width: 400px) {
+        width: 130px;
+        height: 170px;
+      }
     }
 
     p {
