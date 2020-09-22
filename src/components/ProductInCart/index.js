@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 
 import { actions as actionsCart } from '../../store/actions/cart'
 
-import { Container, Control, DeleteFromCart } from './styles'
+import { Container, Control, DeleteFromCart, Resume } from './styles'
 
 function ProductInCart({ id, name, price, description, image, quantity }) {
   const dispatch = useDispatch()
@@ -25,7 +25,7 @@ function ProductInCart({ id, name, price, description, image, quantity }) {
         <p>{description}</p>
       </div>
 
-      <div>
+      <Resume>
         <Control>
           <button onClick={ () => quantity > 1 ? dispatch(actionsCart.decreaseProduct(product)) : null}>-</button>
           <span>{quantity}</span>
@@ -33,7 +33,7 @@ function ProductInCart({ id, name, price, description, image, quantity }) {
         </Control>
         <DeleteFromCart onClick={ () => dispatch(actionsCart.removeProduct(product))}>Remover do carrinho</DeleteFromCart>
         <span>R$ {(quantity * price).toFixed(2)}</span>
-      </div>
+      </Resume>
     </Container>
   )
 }

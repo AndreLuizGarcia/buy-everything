@@ -56,10 +56,12 @@ function Cart() {
       <Header />
       <Main>
         <div>
-          <h1 data-aos="fade-up">Produtos no meu carrinho</h1>
-          <div data-aos="fade-right">
+          { products.length === 0 ? 
+            <h1 style={{flex: 1}}>Não há itens no carrinho</h1> : 
+            <h1>Produtos no meu carrinho</h1>
+          }
+          <div>
             {
-              products.length === 0 ? <h1 style={{flex: 1}}>Não há itens no carrinho</h1> :
               products.map((product) => (
                 <ProductInCart
                   key={product.id + Math.random()}

@@ -30,7 +30,8 @@ export const Section = styled.section`
 
       @media (max-width: 650px) {
         width: unset;
-        margin-left: 72px;
+        margin-left: 60px;
+        font-size: 33px;
       }
     }
 
@@ -48,7 +49,11 @@ export const Section = styled.section`
 
       @media (max-width: 650px) {
         width: 310px;
-        margin-left: 72px;
+        margin-left: 60px;
+      }
+      
+      @media (max-width: 400px) {
+        width: 210px;
       }
     }
   }

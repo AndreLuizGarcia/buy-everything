@@ -8,7 +8,7 @@ import FakeStoreAPI from '../../services/FakeStoreAPI'
 import Header from '../../components/Header'
 import ProductCard from '../../components/ProductCard'
 
-import { Container, Main, SnackNotification } from './styles'
+import { Container, Main, SnackNotification, Cards } from './styles'
 
 import ShimmerProductList from '../../components/ShimmerProductList'
 
@@ -61,8 +61,8 @@ function ProductList() {
       <Main>
         <div>
           <h1 data-aos="fade-up">Todos seus produtos em um único lugar</h1>
-          <input data-aos="fade-up" type='text' placeholder='Digite um produto ou id do produto' value={searchValue} onChange={e => setSearchValue(e.target.value)} />
-          <div data-aos="fade-right">
+          <input type='text' placeholder='Digite um produto ou id do produto' value={searchValue} onChange={e => setSearchValue(e.target.value)} />
+          <Cards>
           {
             products === null ? <ShimmerProductList /> :
             filteredProducts.map(product => (
@@ -76,7 +76,7 @@ function ProductList() {
               />
             ))
           }
-          </div>
+          </Cards>
         </div>
       </Main>
       <SnackNotification visible={snackNotificationVisibility}>

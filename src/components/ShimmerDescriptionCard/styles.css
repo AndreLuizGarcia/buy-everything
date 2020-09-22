@@ -1,0 +1,23 @@
+@media (max-width: 600px) {
+  svg {
+    width: 500px;
+  }
+}
+
+@media (max-width: 500px) {
+  svg {
+    width: 400px;
+  }
+}
+
+@media (max-width: 400px) {
+  svg {
+    width: 300px;
+  }
+}
+
+@media (max-width: 300px) {
+  svg {
+    width: 200px;
+  }
+}

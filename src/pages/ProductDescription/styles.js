@@ -17,10 +17,8 @@ export const Main = styled.div`
 
   > div {
     display: flex;
-    flex-direction: row;
-
-    width: 700px;
-    height: 350px;
+    flex-direction: column;
+    align-items: center;
 
     background: #FFFFFF;
     border: 1px solid rgba(0, 0, 0, 0.12);
@@ -50,6 +48,9 @@ export const CTA = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  flex-direction: column;
+  height: 166px;
 
   > span {
     font-weight: bold;

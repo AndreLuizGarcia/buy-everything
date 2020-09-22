@@ -52,6 +52,12 @@ export const Container = styled.div`
   }
 `;
 
+export const Resume = styled.div`
+  @media(max-width: 600px) {
+    height: 130px;
+  }
+`;
+
 export const Control = styled.div`
   display: flex;
   justify-content: space-around;

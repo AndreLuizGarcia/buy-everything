@@ -71,8 +71,8 @@ function WelcomePage() {
           <img src={shopBackground} alt="Shop Background" data-aos="fade-up" />
         </Section>
 
-        <Wrapper data-aos="zoom-in">
-          <Carousel arrows itemWidth={300} infinite={!products}>
+        <Wrapper>
+          <Carousel arrows itemWidth={250} infinite={!products}>
             {
               products === null ? <ShimmerCarouselCard /> :
               filteredProducts.map(product => (

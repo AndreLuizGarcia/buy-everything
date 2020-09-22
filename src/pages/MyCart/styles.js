@@ -24,7 +24,6 @@ export const Main = styled.div`
 
       @media (max-width: 650px) {
         width: unset;
-        margin-left: 72px;
       }
     }
 

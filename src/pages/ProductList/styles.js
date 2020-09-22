@@ -26,6 +26,10 @@ export const Main = styled.div`
         width: unset;
         margin-left: 72px;
       }
+
+      @media (max-width: 400px) {
+        margin-left: 55px;
+      }
     }
 
     input {
@@ -44,7 +48,17 @@ export const Main = styled.div`
         width: 310px;
         margin-left: 72px;
       }
+
+      @media (max-width: 400px) {
+        margin-left: 55px;
+      }
     }
+  }
+`;
+
+export const Cards = styled.div`
+  @media (max-width: 400px) {
+    width: 420px;
   }
 `;
 
