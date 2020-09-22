@@ -32,6 +32,7 @@ export const Section = styled.section`
         width: unset;
         margin-left: 60px;
         font-size: 33px;
+        line-height: 43px;
       }
     }
 
@@ -53,7 +54,7 @@ export const Section = styled.section`
       }
       
       @media (max-width: 400px) {
-        width: 210px;
+        width: 245px;
       }
     }
   }

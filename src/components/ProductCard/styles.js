@@ -31,6 +31,10 @@ export const Container = styled.div`
   > div {
     margin-left: 16px;
 
+    @media(max-width: 600px) {
+      margin-top: 20px;
+    }
+
     span {
       font-weight: bold;
       margin-bottom: 20px;
