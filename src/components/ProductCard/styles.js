@@ -33,6 +33,7 @@ export const Container = styled.div`
 
     @media(max-width: 600px) {
       margin-top: 20px;
+      margin-left: 0px;
     }
 
     span {
@@ -42,6 +43,7 @@ export const Container = styled.div`
 
     p {
       margin-top: 20px;
+      overflow-wrap: break-word;
     }
   }
 
