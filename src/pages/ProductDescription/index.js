@@ -48,7 +48,7 @@ function ProductDescription() {
     return () => {
       ourRequest.cancel()
     }
-  })
+  }, [])
 
   function handleAddProduct() {
     dispatch(actionsCart.addProduct(product))
